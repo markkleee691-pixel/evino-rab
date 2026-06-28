@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Kamu 💌</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- hiasan ambient: hati-hati melayang di background -->
+<div class="ambient" aria-hidden="true">
+  <span class="drift d1">♥</span>
+  <span class="drift d2">♥</span>
+  <span class="drift d3">♥</span>
+  <span class="drift d4">♥</span>
+  <span class="drift d5">♥</span>
+</div>
+
+<main id="app">
+
+  <!-- ============ SCREEN 1: PEMBUKA ============ -->
+  <section id="screen-intro" class="screen active" aria-label="Pembuka">
+    <div class="card card--intro">
+      <p class="eyebrow">sebuah halaman kecil</p>
+      <h1 class="title-script" id="intro-title">Untuk Kamu,</h1>
+      <p class="body-text" id="intro-subtitle">ada sesuatu yang udah lama mau aku kasih...</p>
+      <button class="btn btn--primary" id="btn-start">Mulai ↦</button>
+    </div>
+  </section>
+
+  <!-- ============ SCREEN 2: GAME / KUIS ============ -->
+  <section id="screen-quiz" class="screen" aria-label="Kuis">
+    <div class="card card--quiz">
+      <p class="eyebrow" id="quiz-title">Kuis Cinta 💘</p>
+      <p class="body-text small" id="quiz-instruction">Jawab dulu sebelum lanjut~</p>
+
+      <div class="progress-dots" id="quiz-progress"></div>
+
+      <div id="quiz-question-wrap">
+        <h2 class="question-text" id="quiz-question"></h2>
+        <div class="options" id="quiz-options"></div>
+      </div>
+
+      <div class="feedback" id="quiz-feedback" hidden>
+        <p id="quiz-feedback-text"></p>
+        <button class="btn btn--primary" id="btn-quiz-next">Lanjut ↦</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCREEN 3: SURAT ============ -->
+  <section id="screen-letter" class="screen" aria-label="Surat">
+    <div class="card card--letter">
+      <p class="eyebrow" id="letter-title">Surat Kecil</p>
+      <div class="letter-paper" id="letter-paragraphs"></div>
+      <p class="signature" id="letter-signature"></p>
+      <button class="btn btn--primary" id="btn-letter-next" hidden>Lanjut ↦</button>
+    </div>
+  </section>
+
+  <!-- ============ SCREEN 4: FINALE (LAGU + FOTO) ============ -->
+  <section id="screen-finale" class="screen" aria-label="Penutup">
+    <div class="card card--finale">
+      <p class="eyebrow" id="finale-title">Makasih udah baca sampe sini 💛</p>
+
+      <div class="music-box">
+        <p class="music-note" id="music-note">Tekan play buat dengerin bareng 🎶</p>
+        <iframe
+          id="spotify-frame"
+          style="border-radius:14px"
+          src=""
+          width="100%"
+          height="152"
+          frameborder="0"
+          allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy">
+        </iframe>
+      </div>
+
+      <div class="polaroid-wall" id="photo-wall"></div>
+
+      <p class="body-text" id="finale-message"></p>
+
+      <button class="btn btn--ghost" id="btn-replay">Ulangi dari awal</button>
+    </div>
+  </section>
+
+</main>
+
+<!-- lightbox foto -->
+<div id="lightbox" class="lightbox" hidden>
+  <button class="lightbox-close" id="lightbox-close" aria-label="Tutup">✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <p id="lightbox-caption"></p>
+</div>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

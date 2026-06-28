@@ -1,0 +1,363 @@
+/* ============================================================
+   STYLE.CSS — tema "buku tempel" (scrapbook) ala surat cinta
+   ============================================================ */
+
+:root {
+  /* --- warna --- */
+  --paper:        #FBF1E1;
+  --paper-deep:   #F0E1C9;
+  --ink:          #3B1F2B;
+  --rose:         #C0566A;
+  --rose-soft:    #F2D6D2;
+  --gold:         #C8932E;
+  --sage:         #748C73;
+
+  /* --- tipografi --- */
+  --font-script: 'Caveat', cursive;
+  --font-body:   'Lora', serif;
+  --font-ui:     'Inter', sans-serif;
+
+  --radius: 18px;
+  --shadow-paper: 0 10px 30px -10px rgba(59, 31, 43, 0.35);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(192, 86, 106, 0.07), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(116, 140, 115, 0.08), transparent 45%),
+    var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* subtle paper grain via noise-like layered gradients */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(59,31,43,0.015) 0px, transparent 2px, transparent 4px);
+  z-index: 0;
+}
+
+button { font-family: var(--font-ui); }
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* ---------------- AMBIENT HEARTS ---------------- */
+.ambient { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.drift {
+  position: absolute;
+  bottom: -10%;
+  font-size: 1.4rem;
+  color: var(--rose-soft);
+  opacity: 0.55;
+  animation: rise linear infinite;
+}
+.d1 { left: 8%;  font-size: 1.1rem; animation-duration: 16s; animation-delay: 0s; }
+.d2 { left: 28%; font-size: 1.6rem; animation-duration: 21s; animation-delay: 3s; }
+.d3 { left: 52%; font-size: 1rem;   animation-duration: 18s; animation-delay: 6s; }
+.d4 { left: 72%; font-size: 1.8rem; animation-duration: 24s; animation-delay: 1.5s; }
+.d5 { left: 90%; font-size: 1.2rem; animation-duration: 19s; animation-delay: 8s; }
+
+@keyframes rise {
+  from { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.55; }
+  90%  { opacity: 0.4; }
+  to   { transform: translateY(-115vh) rotate(25deg); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drift { animation: none; opacity: 0.25; }
+}
+
+/* ---------------- LAYOUT / SCREENS ---------------- */
+#app {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6vh 5vw;
+}
+
+.screen {
+  display: none;
+  width: 100%;
+  max-width: 640px;
+}
+.screen.active {
+  display: block;
+  animation: fadeUp 0.6s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .screen.active { animation: none; }
+}
+
+/* ---------------- CARD (kertas surat) ---------------- */
+.card {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid rgba(59,31,43,0.08);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-paper);
+  padding: 3rem 2.4rem;
+  text-align: center;
+}
+
+/* selotip washi di pojok atas kartu */
+.card::before {
+  content: "";
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  width: 90px;
+  height: 28px;
+  transform: translateX(-50%) rotate(-3deg);
+  background: linear-gradient(180deg, var(--gold), #b87f25);
+  opacity: 0.85;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin: 0 0 0.6rem;
+}
+
+.title-script {
+  font-family: var(--font-script);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 8vw, 3.6rem);
+  margin: 0 0 0.6rem;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+.body-text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--ink);
+  margin: 0 0 1.8rem;
+}
+.body-text.small { font-size: 0.95rem; opacity: 0.8; margin-bottom: 1.4rem; }
+
+/* ---------------- BUTTONS ---------------- */
+.btn {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 999px;
+  padding: 0.85rem 2rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn--primary {
+  background: var(--rose);
+  color: #fff;
+  box-shadow: 0 8px 18px -6px rgba(192, 86, 106, 0.55);
+}
+.btn--primary:hover { transform: translateY(-2px); }
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+  margin-top: 2rem;
+}
+.btn--ghost:hover { background: var(--ink); color: var(--paper); }
+
+/* ---------------- QUIZ ---------------- */
+.progress-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 1.8rem;
+}
+.progress-dots span {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--paper-deep);
+  border: 1px solid rgba(59,31,43,0.2);
+}
+.progress-dots span.done { background: var(--rose); border-color: var(--rose); }
+.progress-dots span.current { background: var(--gold); border-color: var(--gold); }
+
+.question-text {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.3rem;
+  margin: 0 0 1.6rem;
+}
+
+.options {
+  display: grid;
+  gap: 0.7rem;
+}
+.option-btn {
+  font-family: var(--font-ui);
+  font-size: 0.98rem;
+  text-align: left;
+  background: #fff;
+  border: 1.5px solid var(--paper-deep);
+  border-radius: 12px;
+  padding: 0.8rem 1.1rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.1s ease;
+}
+.option-btn:hover { border-color: var(--rose); transform: translateX(2px); }
+.option-btn.correct { border-color: var(--sage); background: rgba(116,140,115,0.12); }
+.option-btn.wrong   { border-color: var(--rose); background: rgba(192,86,106,0.1); }
+.option-btn:disabled { cursor: default; }
+
+.feedback { margin-top: 1.6rem; }
+.feedback p {
+  font-style: italic;
+  color: var(--rose);
+  margin-bottom: 1.2rem;
+}
+
+/* ---------------- LETTER ---------------- */
+.letter-paper {
+  text-align: left;
+  min-height: 160px;
+}
+.letter-paper p {
+  font-family: var(--font-body);
+  font-size: 1.08rem;
+  line-height: 1.85;
+  margin: 0 0 1rem;
+}
+.signature {
+  font-family: var(--font-script);
+  font-size: 1.6rem;
+  color: var(--rose);
+  text-align: right;
+  margin: 1rem 0 2rem;
+}
+
+/* blinking caret while typing */
+.typing::after {
+  content: "|";
+  animation: blink 0.9s steps(1) infinite;
+  color: var(--rose);
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ---------------- FINALE: MUSIK ---------------- */
+.music-box { margin: 0.5rem 0 2rem; }
+.music-note {
+  font-style: italic;
+  color: var(--rose);
+  margin-bottom: 0.8rem;
+}
+
+/* ---------------- FINALE: FOTO (polaroid wall) ---------------- */
+.polaroid-wall {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.4rem;
+  margin: 1rem 0 2rem;
+}
+.polaroid {
+  background: #fff;
+  padding: 10px 10px 28px;
+  box-shadow: 0 6px 16px -6px rgba(0,0,0,0.25);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.polaroid:nth-child(1) { transform: rotate(-3deg); }
+.polaroid:nth-child(2) { transform: rotate(2deg); }
+.polaroid:nth-child(3) { transform: rotate(2.5deg); }
+.polaroid:nth-child(4) { transform: rotate(-2deg); }
+.polaroid:hover { transform: scale(1.04) rotate(0deg); z-index: 2; }
+
+.polaroid .frame {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 2px;
+  overflow: hidden;
+  background: var(--paper-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.polaroid img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.polaroid .placeholder {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--ink);
+  opacity: 0.55;
+  text-align: center;
+  padding: 0 8px;
+}
+.polaroid figcaption {
+  font-family: var(--font-script);
+  font-size: 1.05rem;
+  text-align: center;
+  margin-top: 8px;
+  color: var(--ink);
+}
+
+/* ---------------- LIGHTBOX ---------------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(59,31,43,0.88);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  z-index: 50;
+  padding: 2rem;
+}
+.lightbox img {
+  max-width: min(90vw, 480px);
+  max-height: 65vh;
+  border-radius: 6px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+.lightbox p {
+  font-family: var(--font-script);
+  color: var(--paper);
+  font-size: 1.3rem;
+}
+.lightbox-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--paper);
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 480px) {
+  .card { padding: 2.4rem 1.4rem; }
+  .polaroid-wall { grid-template-columns: 1fr 1fr; gap: 1rem; }
+}
